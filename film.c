@@ -120,15 +120,59 @@ void afficher_liste_chainee(Liste* liste)
 	//tant qu'on n'a pas atteint la fin de la liste
 	while (courant != NULL)
 	{
-		printf("%s\n", courant->film.nom);
-		printf("%d\n", courant->film.note);
+		printf("Film : %s\n", courant->film.nom);
+		printf("Note : %d\n", courant->film.note);
 		courant = courant->suivant;
 	}
 }
 
 
 /*Fonction qui parcourt tout le fichier texte et stocke les data dans une liste chainee*/
-void lecture_fichier(FILE* fichier, Film film[10])
+void lecture_fichier(FILE* fichier, Liste* maliste)
 {
+	//ESSAI : on stocke le nom du film dans le tableau, lecture depuis le fichier txt
+	int index = 0; //pour parcourir le tableau
+	char temp[MAX_STRING_LENGTH]; //tableau de caracteres temporaire pour stocker chaque ligne
+
+	//creation d'un Film temp
+	Film filmTemp;
+
+	char delim[] = ",";
+
+	//ouverture du fichier
+	fichier = fopen("Films_Nono.txt", "r");
+
+	//utilisation de fgets qui lit un fichier plutôt que l'entrée clavier, une ligne à la fois
+	while (fgets(temp, MAX_STRING_LENGTH, fichier) != NULL)
+	{
+		int compteur = 0;
+		char* p = strtok(temp, delim);
+
+		while (p != NULL) //tant qu'il existe encore des virgules
+		{
+			//printf("%s\n", p);
+
+			//permet de sélectionner quel élément est défini, délimité par une virgule
+			switch (compteur)
+			{
+			case 0:
+				strcpy(filmTemp.nom, p);
+				break;
+			case 1:
+				filmTemp.note = atoi(p);
+				break;
+			default:
+				break;
+			}
+			p = strtok(NULL, delim);
+			compteur++;
+		}
+		//printf("Nom du film %d : %s, note : %d\n", index + 1, filmTemp.nom, filmTemp.note);
+		insertion_film(maliste, filmTemp);
+		index++;
+	}
+
+	fclose(fichier);
 
 }
+

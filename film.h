@@ -36,7 +36,7 @@ FILE* creation_fichier(const char* nomFichier); //fonction qui cree un fichier s
 Liste* init_liste(); //fonction d'initialisation de la liste chainee
 void insertion_film(Liste* liste, Film film); //ajoute un bloc film à la liste chainee
 void afficher_liste_chainee(Liste* liste); //fonction qui print la liste chainee sur la sortie
-void lecture_fichier(FILE* fichier); //fonction qui lit le fichier texte et stocke les variables dans la liste chainee
+void lecture_fichier(FILE* fichier, Liste* maliste); //fonction qui lit le fichier texte et stocke les variables dans la liste chainee
 
 
 #endif // !FILM_H
