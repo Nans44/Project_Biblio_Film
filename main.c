@@ -18,5 +18,9 @@ int main()
     lecture_fichier(fichier, maliste);
     afficher_liste_chainee(maliste);
 
+    entrer_nouveau_film(fichier, maliste);
+
+    afficher_liste_chainee(maliste);
+
     return 0;
 }

@@ -37,6 +37,8 @@ Liste* init_liste(); //fonction d'initialisation de la liste chainee
 void insertion_film(Liste* liste, Film film); //ajoute un bloc film à la liste chainee
 void afficher_liste_chainee(Liste* liste); //fonction qui print la liste chainee sur la sortie
 void lecture_fichier(FILE* fichier, Liste* maliste); //fonction qui lit le fichier texte et stocke les variables dans la liste chainee
+void entrer_nouveau_film(FILE* fichier, Liste* maliste);//fonction qui demande à l'utilisateur d'ajouter un film (nom + note) et l'ajoute à la liste chainee + écrit dans le fichier texte le nouveau film
+void ecriture_nouveau_film(FILE* fichier, Film nouveauFilm);//fonction qui écrit le nouveau film dans le fichier texte
 
 
 #endif // !FILM_H

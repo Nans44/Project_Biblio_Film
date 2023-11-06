@@ -118,10 +118,13 @@ void afficher_liste_chainee(Liste* liste)
 
 	FilmNode* courant = liste->premier;
 	//tant qu'on n'a pas atteint la fin de la liste
+	printf("Voici la liste de vos films vus ainsi que leur note sur 5 : \n");
+	printf("\n");
 	while (courant != NULL)
 	{
 		printf("Film : %s\n", courant->film.nom);
 		printf("Note : %d\n", courant->film.note);
+		printf("\n");
 		courant = courant->suivant;
 	}
 }
@@ -171,8 +174,51 @@ void lecture_fichier(FILE* fichier, Liste* maliste)
 		insertion_film(maliste, filmTemp);
 		index++;
 	}
-
+	//Fermeture du fichier
 	fclose(fichier);
 
+}
+
+void entrer_nouveau_film(FILE* fichier, Liste* maliste)
+{
+	Film nouveauFilm;
+	printf("Vous avez choisi d'ajouter un nouveau film vu ! \n");
+	printf("Entrez le nom du film : \n");
+	//limite la saisie à 79 caractères pour éviter les dépassements de tampon, et en lisant toute la ligne sans se soucier des espaces
+	if (scanf(" %79[^\n]", nouveauFilm.nom) != 1)
+	{
+		perror("Erreur de saisie du nom du film\n");
+		return;
+	}
+
+	//pour consommer le caractère de nouvelle ligne restant dans le tampon
+	int c;
+	while ((c = getchar()) != '\n' && c != EOF);
+
+	printf("Entrez la note sur 5 à ce film : \n");
+	if (scanf("%d", &nouveauFilm.note) != 1)
+	{
+		perror("Erreur de saisie de la note du film\n");
+		return;
+	}
+
+	insertion_film(maliste, nouveauFilm);
+
+	ecriture_nouveau_film(fichier, nouveauFilm);
+}
+
+void ecriture_nouveau_film(FILE* fichier, Film nouveauFilm)
+{
+	//ouverture du fichier, mode d'ouverture "a" pour append
+	fichier = fopen("Films_Nono.txt", "a");
+	if (fichier == NULL)
+	{
+		perror("Erreur lors de l'ouverture du fichier en mode append.\n");
+		exit(EXIT_FAILURE);
+	}
+
+	fprintf(fichier, "%s, %d", nouveauFilm.nom, nouveauFilm.note);
+
+	fclose(fichier);
 }
 
