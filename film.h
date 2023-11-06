@@ -40,5 +40,7 @@ void lecture_fichier(FILE* fichier, Liste* maliste); //fonction qui lit le fichi
 void entrer_nouveau_film(FILE* fichier, Liste* maliste);//fonction qui demande à l'utilisateur d'ajouter un film (nom + note) et l'ajoute à la liste chainee + écrit dans le fichier texte le nouveau film
 void ecriture_nouveau_film(FILE* fichier, Film nouveauFilm);//fonction qui écrit le nouveau film dans le fichier texte
 
+int interface_ihm(FILE* fichier, Liste* maliste); //fonction qui va permettre à l'utilisateur de choisir ce qu'il veut faire (renvoie 0 pour quitter le programme)
+
 
 #endif // !FILM_H

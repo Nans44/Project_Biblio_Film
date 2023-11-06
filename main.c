@@ -4,6 +4,7 @@
 #include <string.h> // Inclure la bibliothèque string.h
 #include "film.h"
 
+
 #define MAX_STRING_LENGTH 80 // Utilisez un nom unique
 
 
@@ -16,11 +17,8 @@ int main()
     Liste* maliste = init_liste();
 
     lecture_fichier(fichier, maliste);
-    afficher_liste_chainee(maliste);
-
-    entrer_nouveau_film(fichier, maliste);
-
-    afficher_liste_chainee(maliste);
+    
+    while(interface_ihm(fichier, maliste));
 
     return 0;
 }

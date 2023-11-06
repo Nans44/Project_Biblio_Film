@@ -123,7 +123,7 @@ void afficher_liste_chainee(Liste* liste)
 	while (courant != NULL)
 	{
 		printf("Film : %s\n", courant->film.nom);
-		printf("Note : %d\n", courant->film.note);
+		printf("Note : %d / 5\n", courant->film.note);
 		printf("\n");
 		courant = courant->suivant;
 	}
@@ -218,7 +218,38 @@ void ecriture_nouveau_film(FILE* fichier, Film nouveauFilm)
 	}
 
 	fprintf(fichier, "%s, %d", nouveauFilm.nom, nouveauFilm.note);
+	fprintf(fichier,"\n");
 
 	fclose(fichier);
+}
+
+int interface_ihm(FILE* fichier, Liste* liste)
+{
+	char c;
+	printf("Que voulez-vous faire ?\n");
+	printf("Entrez '+' pour ajouter un nouveau film, 'a' pour afficher vos films, q pour quitter le programme : \n");
+	scanf("%c", &c);
+
+	if (c == 'q')
+	{
+		printf("Fermeture du programme \n");
+		return 0;
+	}
+	else
+	{
+		if (c == '+')
+		{
+			entrer_nouveau_film(fichier, liste);
+		}
+
+		else if (c == 'a')
+		{
+			afficher_liste_chainee(liste);
+		}
+		//pour consommer le caractère de nouvelle ligne restant dans le tampon
+		int c;
+		while ((c = getchar()) != '\n' && c != EOF);
+		return 1;
+	}
 }
 
