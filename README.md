@@ -20,3 +20,5 @@ A chaque exécution du programme on veut :
 	Par année de sortie
 	Par genre
 -	(Optionnel) afficher des statistiques, comme la note moyenne, le genre préféré, etc…
+
+Dans son implémentation actuelle, on souhaite utiliser les listes chaînées. Lors de la lecture du fichier texte, les films sont sauvegardées dans une liste chaînée, ce qui constitue notre principal lien.
