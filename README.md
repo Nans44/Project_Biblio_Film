@@ -9,7 +9,7 @@ Principe du projet : afin de tenir un journal des films vus, en leur attribuant 
 Le but de ce code N'EST PAS de faire quelque chose d'optimisé en langage C, mais plutôt de balayer tous les concepts étudiés pour en utiliser le plus possible au sein d'un même projet. D'autres projets du genre, plus optimisés,
 seront réalisés dans d'autres langages plus adaptés (C++, Java, Python).
 
-A chaque exécution du programme veut :
+A chaque exécution du programme on veut :
 -	Ajouter un film vu, avec son nom, la date du visionnage, le genre, l’année de sortie, et une note sur 5 attribuée par l’utilisateur
 -	Modifier un film
 -	Supprimer un film
