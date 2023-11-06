@@ -34,6 +34,7 @@ int main()
         {
             printf("%s\n", p);
 
+            //permet de sélectionner quel élément est défini, délimité par une virgule
             switch (compteur)
             {
                 case 0:
@@ -49,8 +50,10 @@ int main()
             compteur++;
         }
         printf("Nom du film %d : %s, note : %d\n", index+1, films[index].nom, films[index].note);
+        insertion_film(maliste, films[index]);
         index++;
     }
+    afficher_liste_chainee(maliste);
 
     fclose(fichier);
 
