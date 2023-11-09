@@ -223,11 +223,66 @@ void ecriture_nouveau_film(FILE* fichier, Film nouveauFilm)
 	fclose(fichier);
 }
 
+void changer_note_film(FILE* fichier, Liste* maliste)
+{
+	char nomFilm[MAX_STRING_LENGTH];
+	printf("Entrez le nom du film dont vous voulez modifier la note : \n");
+	//limite la saisie à 79 caractères pour éviter les dépassements de tampon, et en lisant toute la ligne sans se soucier des espaces
+	if (scanf(" %79[^\n]", nomFilm) != 1)
+	{
+		perror("Erreur de saisie du nom du film\n");
+		return;
+	}
+
+	//pour consommer le caractère de nouvelle ligne restant dans le tampon
+	int c;
+	while ((c = getchar()) != '\n' && c != EOF);
+
+	//On vérifie si la liste est nulle
+	if (maliste == NULL)
+	{
+		perror("La liste est nulle \n");
+		exit(EXIT_FAILURE);
+	}
+	//On créé un pointeur de FilmNode qui va parcourir tous les films créés en commençant par le premier
+	if (maliste->premier == NULL)
+	{
+		printf("La liste est vide\n");
+		exit(EXIT_FAILURE);
+	}
+
+	FilmNode* courant = maliste->premier;
+	FilmNode* filmAModifier = NULL; //pointeur sur le film à supprimer
+
+	while (courant != NULL)
+	{
+		if (strncmp(courant->film.nom, nomFilm, strlen(nomFilm)) == 0)
+		{
+			filmAModifier = courant;
+			break;
+		}
+		courant = courant->suivant;
+	}
+
+	if (filmAModifier == NULL)
+	{
+		printf("Aucun film correspondant a modifier \n");
+		exit(EXIT_FAILURE);
+	}
+
+	printf("Film trouvé ! Quelle note voulez-vous lui attribuer ? \n");
+	int note;
+	scanf("%d", &note);
+	filmAModifier->film.note = note;
+
+
+}
+
 int interface_ihm(FILE* fichier, Liste* liste)
 {
 	char c;
 	printf("Que voulez-vous faire ?\n");
-	printf("Entrez '+' pour ajouter un nouveau film, 'a' pour afficher vos films, q pour quitter le programme : \n");
+	printf("Entrez '+' pour ajouter un nouveau film, 'a' pour afficher vos films, 'c' pour changer une note, 'q' pour quitter le programme : \n");
 	scanf("%c", &c);
 
 	if (c == 'q')
@@ -240,6 +295,10 @@ int interface_ihm(FILE* fichier, Liste* liste)
 		if (c == '+')
 		{
 			entrer_nouveau_film(fichier, liste);
+		}
+		else if (c == 'c')
+		{
+			changer_note_film(fichier, liste);
 		}
 
 		else if (c == 'a')
